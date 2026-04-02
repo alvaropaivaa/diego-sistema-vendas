@@ -280,11 +280,13 @@ function parseCliente(raw: any): Cliente {
   };
 }
 function unparseCliente(c: Cliente): any {
-  return {
-    id: c.id, nome: c.nome, email: c.email, telefone: c.telefone,
+  const mapped: any = {
+    nome: c.nome, email: c.email, telefone: c.telefone,
     data_nascimento: c.dataNascimento, objetivo: c.objetivo, status: c.status,
     data_inicio: c.dataInicio, observacoes: c.observacoes, foto: c.foto
   };
+  if (c.id) mapped.id = c.id;
+  return mapped;
 }
 
 function parseTreino(raw: any): Treino {
@@ -295,10 +297,12 @@ function parseTreino(raw: any): Treino {
   };
 }
 function unparseTreino(t: Treino): any {
-  return {
-    id: t.id, cliente_id: t.clienteId, nome: t.nome, tipo: t.tipo,
+  const mapped: any = {
+    cliente_id: t.clienteId, nome: t.nome, tipo: t.tipo,
     dias_semana: t.diasSemana, grupos: t.grupos, data_criacao: t.dataCriacao, ativo: t.ativo
   };
+  if (t.id) mapped.id = t.id;
+  return mapped;
 }
 
 function parseDieta(raw: any): Dieta {
@@ -309,10 +313,12 @@ function parseDieta(raw: any): Dieta {
   };
 }
 function unparseDieta(d: Dieta): any {
-  return {
-    id: d.id, cliente_id: d.clienteId, nome: d.nome, objetivo: d.objetivo,
+  const mapped: any = {
+    cliente_id: d.clienteId, nome: d.nome, objetivo: d.objetivo,
     refeicoes: d.refeicoes, data_criacao: d.dataCriacao, ativa: d.ativa, total_calorias: d.totalCalorias
   };
+  if (d.id) mapped.id = d.id;
+  return mapped;
 }
 
 function parseCheckin(raw: any): Checkin {
@@ -323,7 +329,9 @@ function parseCheckin(raw: any): Checkin {
 }
 function unparseCheckin(c: Checkin): any {
   const { id, clienteId, data, status, ...respostas } = c;
-  return { id, cliente_id: clienteId, data, status, respostas };
+  const mapped: any = { cliente_id: clienteId, data, status, respostas };
+  if (id) mapped.id = id;
+  return mapped;
 }
 
 function parseMensagem(raw: any): Mensagem {
@@ -341,7 +349,9 @@ function parseAnamnese(raw: any): Anamnese {
 }
 function unparseAnamnese(from: Anamnese): any {
   const { id, clienteId, data, status, ...respostas } = from;
-  return { id, cliente_id: clienteId, data, status, respostas };
+  const mapped: any = { cliente_id: clienteId, data, status, respostas };
+  if (id) mapped.id = id;
+  return mapped;
 }
 
 function parsePagamento(raw: any): Pagamento {
@@ -353,9 +363,11 @@ function parsePagamento(raw: any): Pagamento {
   };
 }
 function unparsePagamento(p: Pagamento): any {
-  return {
-    id: p.id, cliente_id: p.clienteId, valor: p.valor, data_vencimento: p.dataVencimento,
+  const mapped: any = {
+    cliente_id: p.clienteId, valor: p.valor, data_vencimento: p.dataVencimento,
     data_pagamento: p.dataPagamento, status: p.status, mes_referencia: p.mesReferencia,
     forma_pagamento: p.formaPagamento, observacoes: p.observacoes
   };
+  if (p.id) mapped.id = p.id;
+  return mapped;
 }

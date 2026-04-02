@@ -17,18 +17,6 @@ export default function Dashboard() {
   const { anamneses, loading: load3 } = useAnamneses();
   const { config, loading: load4 } = useConfiguracoes();
 
-  if (load1 || load2 || load3 || load4 || !config) {
-    return <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Carregando dados...</div>;
-  }
-
-  const clientesAtivos = clientes.filter(c => c.status === 'ativo');
-  const anamnesesPendentes = clientes.filter(c => {
-    const a = anamneses.find(an => an.clienteId === c.id);
-    return !a || a.status === 'pendente';
-  });
-
-  const percent = config.metaMensal > 0 ? Math.round((clientesAtivos.length / config.metaMensal) * 100) : 0;
-
   const greeting = useMemo(() => {
     const h = new Date().getHours();
     if (h < 12) return 'Bom dia';
@@ -43,6 +31,18 @@ export default function Dashboard() {
     'Cada treino te leva mais perto do seu objetivo.',
   ];
   const [quote] = useState(() => quotes[Math.floor(Math.random() * quotes.length)]);
+
+  if (load1 || load2 || load3 || load4 || !config) {
+    return <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Carregando dados...</div>;
+  }
+
+  const clientesAtivos = clientes.filter(c => c.status === 'ativo');
+  const anamnesesPendentes = clientes.filter(c => {
+    const a = anamneses.find(an => an.clienteId === c.id);
+    return !a || a.status === 'pendente';
+  });
+
+  const percent = config.metaMensal > 0 ? Math.round((clientesAtivos.length / config.metaMensal) * 100) : 0;
 
   const circumference = 2 * Math.PI * 68;
   const dashOffset = circumference - (percent / 100) * circumference;

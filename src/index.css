@@ -274,6 +274,32 @@ body {
   margin-bottom: 40px;
 }
 
+.profile-footer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.profile-footer p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.profile-footer span {
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: all var(--transition-fast);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.profile-footer span:hover {
+  color: var(--accent-hover);
+  text-shadow: 0 0 12px var(--accent-glow);
+}
+
 .profile-card {
   display: flex;
   align-items: center;
@@ -426,6 +452,30 @@ body {
 }
 
 .login-form .form-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-muted);
+  outline: none;
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.form-select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-muted);
   outline: none;
@@ -2789,3 +2839,344 @@ body {
   transform: scale(1.2) translateY(-2px);
   filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.4));
 }
+
+/* ========= ANAMNESE PREMIUM (WIZARD) ========= */
+.anamnese-premium {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.anamnese-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.anamnese-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.anamnese-step-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+}
+
+.anamnese-step-item span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+}
+
+.anamnese-step-item.active .step-icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-glow);
+}
+
+.anamnese-step-item.active span {
+  color: var(--text-primary);
+}
+
+.anamnese-step-item.completed .step-icon {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.anamnese-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+.anamnese-section .form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.anamnese-section .form-group input,
+.anamnese-section .form-group textarea,
+.anamnese-section .form-group select {
+  width: 100%;
+  padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.anamnese-section .form-group input:focus,
+.anamnese-section .form-group textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  background: var(--bg-card-hover);
+}
+
+.options-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.options-horizontal {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.option-btn {
+  padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.option-btn:hover {
+  border-color: var(--text-muted);
+  background: var(--bg-card-hover);
+}
+
+.option-btn.active {
+  background: var(--accent-muted);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.scale-horizontal {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.scale-btn {
+  flex: 1;
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.scale-btn:hover {
+  background: var(--bg-card-hover);
+}
+
+.scale-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.anamnese-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.btn-prev {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-next, .btn-submit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-submit {
+  background: var(--success);
+}
+
+.btn-next:hover, .btn-submit:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-glow);
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: auto; }
+  .anamnese-steps span { display: none; }
+  .anamnese-card { padding: 24px; }
+}
+
+/* ========= ONBOARDING DASHBOARD STATES ========= */
+.onboarding-card {
+  background: linear-gradient(135deg, var(--bg-card), #1a1a1a);
+  border: 2px solid var(--border-accent);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  margin-bottom: 24px;
+}
+
+.onboarding-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-muted);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: var(--accent);
+  animation: float 3s ease-in-out infinite;
+}
+
+.onboarding-card h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.onboarding-card p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.onboarding-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+}
+
+.onboarding-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glow);
+}
+
+.waiting-card {
+  border-color: var(--info);
+  background: linear-gradient(135deg, var(--bg-card), #0a192f);
+}
+
+.waiting-icon {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--info);
+}
+
+.loader-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.loader-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--info);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.loader-dot:nth-child(2) { animation-delay: 0.2s; }
+.loader-dot:nth-child(3) { animation-delay: 0.4s; }

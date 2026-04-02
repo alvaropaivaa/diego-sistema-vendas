@@ -41,6 +41,10 @@ export default function ProfileSelectPage() {
           </div>
           <ArrowRight size={18} className="profile-card-arrow" />
         </div>
+
+        <div className="profile-footer animate-fadeIn stagger-3">
+          <p>Novo por aqui? <span onClick={() => navigate('/register')}>Criar conta agora</span></p>
+        </div>
       </div>
     </div>
   );

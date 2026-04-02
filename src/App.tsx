@@ -20,6 +20,7 @@ import AlunoDietas from './pages/aluno/AlunoDietas';
 import AlunoCheckins from './pages/aluno/AlunoCheckins';
 import AlunoMensagens from './pages/aluno/AlunoMensagens';
 import AlunoCheckinAnamnese from './pages/aluno/CheckinAnamnese';
+import AnamneseIntuitiva from './pages/aluno/AnamneseIntuitiva';
 
 function ProtectedRoute({ children, tipo }: { children: React.ReactNode; tipo: 'trainer' | 'aluno' }) {
   const { isAuthenticated, user } = useAuth();
@@ -34,6 +35,7 @@ function App() {
       <Route path="/" element={<ProfileSelectPage />} />
       <Route path="/login/:tipo" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/aluno/anamnese-inicial" element={<AnamneseIntuitiva />} />
 
       {/* Trainer Routes */}
       <Route

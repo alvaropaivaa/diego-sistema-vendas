@@ -1,8 +1,18 @@
 import { useState, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useTreinos, useCheckins, useClientes } from '../../hooks/useData';
-import { Dumbbell, Salad, ClipboardCheck, BarChart3, Droplets, Droplet } from 'lucide-react';
+import { useTreinos, useCheckins, useClientes, useAnamneses, useDietas } from '../../hooks/useData';
+import { 
+  Dumbbell, 
+  Salad, 
+  ClipboardCheck, 
+  BarChart3, 
+  Droplets, 
+  Droplet, 
+  Sparkles, 
+  Clock, 
+  ChevronRight 
+} from 'lucide-react';
 
 export default function AlunoDashboard() {
   const { user } = useAuth();
@@ -10,28 +20,33 @@ export default function AlunoDashboard() {
   
   const [hydration, setHydration] = useState(0);
 
-  const clienteId = user?.id || '';
-  const { treinos: allTreinos, loading: tLoading } = useTreinos(clienteId);
-  const { clientes, loading: cLoading } = useClientes();
-  const { checkins, loading: chLoading } = useCheckins(clienteId);
-  
-  if (tLoading || cLoading || chLoading) {
-    return <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Carregando dados...</div>;
-  }
-
-  const treinos = allTreinos.filter(t => t.ativo);
-  const clienteData = clientes.find(c => c.id === clienteId);
-  
-  const lastCheckin = checkins.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime())[0];
-  const pesoAtual = lastCheckin?.pesoAtual || '--';
-  const metaObj = clienteData?.objetivo || '--';
-
   const greeting = useMemo(() => {
     const h = new Date().getHours();
     if (h < 12) return 'BOM DIA';
     if (h < 18) return 'BOA TARDE';
     return 'BOA NOITE';
   }, []);
+
+  const clienteId = user?.id || '';
+  const { treinos: allTreinos, loading: tLoading } = useTreinos(clienteId);
+  const { dietas, loading: dLoading } = useDietas(clienteId);
+  const { clientes, loading: cLoading } = useClientes();
+  const { checkins, loading: chLoading } = useCheckins(clienteId);
+  const { anamneses, loading: aLoading } = useAnamneses(clienteId);
+  
+  if (tLoading || cLoading || chLoading || aLoading || dLoading) {
+    return <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Carregando dados...</div>;
+  }
+
+  const hasAnamnese = anamneses.length > 0;
+  const hasPlan = allTreinos.length > 0 || dietas.length > 0;
+  
+  const treinos = allTreinos.filter(t => t.ativo);
+  const clienteData = clientes.find(c => c.id === clienteId);
+  
+  const lastCheckin = checkins.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime())[0];
+  const pesoAtual = lastCheckin?.pesoAtual || '--';
+  const metaObj = clienteData?.objetivo || '--';
 
   const primeiroTreino = treinos[0];
 
@@ -43,6 +58,45 @@ export default function AlunoDashboard() {
     }
   };
 
+  // STATE A: MANDATORY ANAMNESIS
+  if (!hasAnamnese) {
+    return (
+      <div className="mobile-dashboard" style={{ justifyContent: 'center', minHeight: '80vh' }}>
+        <div className="onboarding-card">
+          <div className="onboarding-icon">
+            <Sparkles size={40} />
+          </div>
+          <h2>BEM-VINDO!</h2>
+          <p>Para o Diego montar seu treino e dieta personalizados, ele precisa te conhecer melhor. Vamos preencher sua anamnese?</p>
+          <button className="onboarding-btn" onClick={() => navigate('/aluno/anamnese-inicial')}>
+            Começar Agora <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // STATE B: WAITING FOR PLAN
+  if (!hasPlan) {
+    return (
+      <div className="mobile-dashboard" style={{ justifyContent: 'center', minHeight: '80vh' }}>
+        <div className="onboarding-card waiting-card">
+          <div className="onboarding-icon waiting-icon">
+            <Clock size={40} />
+          </div>
+          <h2>PLANO EM PRODUÇÃO</h2>
+          <p>O Diego já recebeu sua anamnese e está preparando sua dieta e treino com base nos seus objetivos. Em breve estará disponível aqui!</p>
+          <div className="loader-dots">
+            <div className="loader-dot"></div>
+            <div className="loader-dot"></div>
+            <div className="loader-dot"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // STATE C: NORMAL DASHBOARD
   return (
     <div className="mobile-dashboard">
       

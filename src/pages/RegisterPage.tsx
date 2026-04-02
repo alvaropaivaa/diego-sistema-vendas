@@ -128,7 +128,6 @@ export default function RegisterPage() {
               value={form.objetivo}
               onChange={e => setForm({ ...form, objetivo: e.target.value })}
               required
-              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--card-bg)', color: 'var(--text)' }}
             >
               <option value="">Selecione um objetivo</option>
               <option value="Hipertrofia">Hipertrofia (Ganho de Massa)</option>
