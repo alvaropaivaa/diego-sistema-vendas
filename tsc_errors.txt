@@ -1,0 +1,7 @@
+﻿src/data/store.ts(2,15): error TS6196: 'AppState' is declared but never used.
+src/data/store.ts(165,56): error TS6133: 'tipo' is declared but its value is never read.
+src/pages/aluno/AlunoCheckins.tsx(1,20): error TS6133: 'useEffect' is declared but its value is never read.
+src/pages/aluno/AlunoCheckins.tsx(4,1): error TS6133: 'Checkin' is declared but its value is never read.
+src/pages/aluno/AlunoDashboard.tsx(1,20): error TS6133: 'useEffect' is declared but its value is never read.
+src/pages/trainer/Ajustes.tsx(5,26): error TS6133: 'AlertTriangle' is declared but its value is never read.
+src/pages/trainer/Financeiro.tsx(1,31): error TS6133: 'useCallback' is declared but its value is never read.
